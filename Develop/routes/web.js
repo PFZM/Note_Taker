@@ -1,12 +1,16 @@
-const express = require("express");
-const router = express.Router();
+const webRoutes = require("express").Router();
+const path = require("path");
 
-router.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "Develop/public/index.html"));
+webRoutes.get("/", (req, res) => {
+  res.sendFile(path.join(process.cwd(), "public/index.html"));
 });
 
-router.get("/notes", (req, res) => {
-  res.sendFile(path.join(__dirname, "Develop/public/notes.html"));
+webRoutes.get("/notes", (req, res) => {
+  res.sendFile(path.join(process.cwd(), "public/notes.html"));
 });
 
-module.exports = router;
+// webRoutes.get("*", (req, res) => {
+//   res.sendFile(path.join(process.cwd(), "public/index.html"));
+// });
+
+module.exports = webRoutes;
