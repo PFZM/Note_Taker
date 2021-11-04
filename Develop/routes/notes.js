@@ -1,11 +1,18 @@
 const notes = require("express").Router();
-const fs = require("fs");
-const db = require("../db/db.json");
 const { v4: uuidv4 } = require("uuid");
+const {
+  readFromFile,
+  writeToFile,
+  appendToFile,
+} = require("../helpers/fsUtils");
 
 notes.get("/api/notes", (req, res) => {
   console.info(`${req.method} request received to get notes`);
-  return res.json(db);
+  readFromFile("./db/db.json")
+    .then((data) => {
+      res.json(JSON.parse(data));
+    })
+    .catch((error) => console.error(error));
 });
 
 notes.post("/api/notes", (req, res) => {
@@ -20,10 +27,7 @@ notes.post("/api/notes", (req, res) => {
       text,
       note_id: uuidv4(),
     };
-
-    const noteString = JSON.stringify(newNote);
-
-    // fs.writeFile("..")
+    appendToFile("./db/db.json", newNote);
   }
 });
 
