@@ -3,9 +3,10 @@ const { v4: uuidv4 } = require("uuid");
 const {
   readFromFile,
   writeToFile,
-  appendToFile,
+  readAndAppend,
 } = require("../helpers/fsUtils");
 
+// GET route for retrieving all the notes
 notes.get("/api/notes", (req, res) => {
   console.info(`${req.method} request received to get notes`);
   readFromFile("./db/db.json")
@@ -15,6 +16,7 @@ notes.get("/api/notes", (req, res) => {
     .catch((error) => console.error(error));
 });
 
+// POST route for submitting a note
 notes.post("/api/notes", (req, res) => {
   console.info(`${req.method} request received to add a note`);
   const { title, text } = req.body;
@@ -27,12 +29,23 @@ notes.post("/api/notes", (req, res) => {
       text,
       note_id: uuidv4(),
     };
-    appendToFile("./db/db.json", newNote);
+
+    readAndAppend(newNote, "./db/db.json");
   }
 });
 
-// notes.get("api/notes/:title", (req, res) => {
-//   const title = req.params.title;
-// });
+// DELETE route for a specific note
+notes.delete("/api/notes/:note_id", (req, res) => {
+  console.info(`${req.method} request received to delete a note`);
+  const noteID = req.params.note_id;
+  readFromFile("./db/db.json")
+    .then((data) => JSON.parse(data))
+    .then((notesData) => {
+      const result = notesData.filter((note) => note.note_id !== noteID);
+      writeToFile("./db/db.json", result);
+      res.json(`item ${noteID} has been deleted`);
+    })
+    .catch((error) => console.error(error));
+});
 
 module.exports = notes;

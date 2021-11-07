@@ -1,5 +1,17 @@
-{
-  "title": "hola",
-  "text": "Tholte",
-  "note_id": "b6675e64-c8b7-4f2a-b1b3-d53f00305793"
-}
+[
+  {
+    "title": "hola",
+    "text": "Tholte",
+    "note_id": "b6675e64-c8b7-4f2a-b1b3-d53f00305793"
+  },
+  {
+    "title": "hola",
+    "text": "Tholte",
+    "note_id": "3e8966fd-74cd-4ac1-92b9-7193ffe8b8e3"
+  },
+  {
+    "title": "hola",
+    "text": "Tholte",
+    "note_id": "9dd2cbf0-4dd9-4677-9a46-2a67f9cafab5"
+  }
+]
