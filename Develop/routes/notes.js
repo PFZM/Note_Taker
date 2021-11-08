@@ -27,21 +27,24 @@ notes.post("/api/notes", (req, res) => {
     const newNote = {
       title,
       text,
-      note_id: uuidv4(),
+      id: uuidv4(),
     };
 
     readAndAppend(newNote, "./db/db.json");
+    res.status(201).json("Note posted");
   }
 });
 
 // DELETE route for a specific note
-notes.delete("/api/notes/:note_id", (req, res) => {
+notes.delete("/api/notes/:id", (req, res) => {
   console.info(`${req.method} request received to delete a note`);
-  const noteID = req.params.note_id;
+  const noteID = req.params.id;
+  console.log("noteID", noteID);
   readFromFile("./db/db.json")
     .then((data) => JSON.parse(data))
     .then((notesData) => {
-      const result = notesData.filter((note) => note.note_id !== noteID);
+      const result = notesData.filter((note) => note.id !== noteID);
+      console.log("result", result);
       writeToFile("./db/db.json", result);
       res.json(`item ${noteID} has been deleted`);
     })
