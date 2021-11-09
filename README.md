@@ -4,6 +4,8 @@
 
 ## Link to deployed application:
 
+[Link to deployed application - Heroku](https://note-taker-pfzm.herokuapp.com/)
+
 ## Description
 
 This application is created to write and save notes. This application use an Express.js back end and will save and retrieve note data from a JSON file.
@@ -40,6 +42,12 @@ node server.js
 ```
 
 Application runs on app will run in [LocalHost](http://localhost/3001).
+
+The application also runs on the deployed environment in Heroku - [Link](https://note-taker-pfzm.herokuapp.com/).
+
+The following link show the web application's appearance and functionality:
+
+![Create new notes, save the notes, retrieve notes, delete notes.](./gif/note_taker_app.gif)
 
 ## License
 
